@@ -135,6 +135,40 @@
 
 
 		// ************************************************** 
+		//  drawEllipse
+		/*!
+			@brief Draws an ellipse
+			@param $cx Center's X coordinate
+			@param $cy Center's Y coordinate
+			@param $width The ellipse width
+			@param $height The ellipse height
+		*/
+		// ************************************************** 
+		public function drawEllipse( $cx, $cy, $width, $height )
+		{
+			$color = $this->createColorAllocation();
+			imageellipse( $this->image, $cx, $cy, $width, 
+				$height, $color );
+		}
+
+		// ************************************************** 
+		//  drawFilledEllipse
+		/*!
+			@brief Draws an filled ellipse
+			@param $cx Center's X coordinate
+			@param $cy Center's Y coordinate
+			@param $width The ellipse width
+			@param $height The ellipse height
+		*/
+		// ************************************************** 
+		public function drawFilledEllipse( $cx, $cy, $width, $height )
+		{
+			$color = $this->createColorAllocation();
+			imagefilledellipse( $this->image, $cx, $cy, $width, 
+				$height, $color );
+		}
+
+		// ************************************************** 
 		//  setColor
 		/*!
 			@brief Set color what will be used in next action
