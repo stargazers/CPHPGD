@@ -199,6 +199,39 @@
 		}
 
 		// ************************************************** 
+		//  drawPixel
+		/*!
+			@brief Draw one pixel
+			@param $x X position
+			@param $y Y position
+		*/
+		// ************************************************** 
+		public function drawPixel( $x, $y )
+		{
+			$color = $this->createColorAllocation();
+			imagesetpixel( $this->image, $x, $y, $color );
+		}
+
+		// ************************************************** 
+		//  drawArc
+		/*!
+			@brief Draws an arc
+			@param $cx X center
+			@param $cy Y center
+			@param $width Width of an arc
+			@param $height Height of an arc
+			@param $start Start angle in decrees
+			@param $end End angle in decrees.
+		*/
+		// ************************************************** 
+		public function drawArc( $cx, $cy, $width, $height, $start, $end )
+		{
+			$color = $this->createColorAllocation();
+			imagearc( $this->image, $cx, $cy, $width, $height,
+				$start, $end, $color );
+		}
+
+		// ************************************************** 
 		//  setColor
 		/*!
 			@brief Set color what will be used in next action
