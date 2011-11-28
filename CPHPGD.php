@@ -169,6 +169,36 @@
 		}
 
 		// ************************************************** 
+		//  drawPolygon
+		/*!
+			@brief Draws a polygon
+			@param $points Array of points, must be in format where
+			  every second item is x and every other is y.
+		*/
+		// ************************************************** 
+		public function drawPolygon( $points )
+		{
+			$color = $this->createColorAllocation();
+			imagepolygon( $this->image, $points, 
+				( count( $points ) ) / 2, $color );
+		}
+
+		// ************************************************** 
+		//  drawPolygon
+		/*!
+			@brief Draws a filled polygon
+			@param $points Array of points, must be in format where
+			  every second item is x and every other is y.
+		*/
+		// ************************************************** 
+		public function drawFilledPolygon( $points )
+		{
+			$color = $this->createColorAllocation();
+			imagefilledpolygon( $this->image, $points, 
+				( count( $points ) ) / 2, $color );
+		}
+
+		// ************************************************** 
 		//  setColor
 		/*!
 			@brief Set color what will be used in next action
