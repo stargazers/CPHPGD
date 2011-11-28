@@ -232,6 +232,22 @@
 		}
 
 		// ************************************************** 
+		//  drawLine
+		/*!
+			@brief Draws a line
+			@param $x1 X start position
+			@param $y1 Y start position
+			@param $x2 X end position
+			@param $y2 Y end position
+		*/
+		// ************************************************** 
+		public function drawLine( $x1, $y1, $x2, $y2 )
+		{
+			$color = $this->createColorAllocation();
+			imageline( $this->image, $x1, $y1, $x2, $y2, $color );
+		}
+
+		// ************************************************** 
 		//  setColor
 		/*!
 			@brief Set color what will be used in next action
