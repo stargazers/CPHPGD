@@ -31,6 +31,18 @@
 	class CPHPGD
 	{
 		private $image;
+		private $color;
+
+		// ************************************************** 
+		//  __destruct
+		/*!
+			@brief Class destructor. Removes image from memory.
+		*/
+		// ************************************************** 
+		public function __destruct()
+		{
+			imagedestroy( $this->image );
+		}
 
 		// ************************************************** 
 		//  createImage
@@ -43,25 +55,22 @@
 		public function createImage( $width, $height )
 		{
 			$this->image = imagecreatetruecolor( $width, $height );	
-			$this->fill( 0, 0, 'FFFFFF' );
+			$this->setColor( '#FFFFFF' );
+			$this->fill( 0, 0 );
 		}
 
 		// ************************************************** 
 		//  fill
 		/*!
-			@brief Performs a flood fill
+			@brief Performs a flood fill. Color used is set via setColor.
 			@param $x X-Coordinate
 			@param $y Y-Coordinate
-			@param $color Color in hex format, like #FFAAFF
 		*/
 		// ************************************************** 
-		public function fill( $x, $y, $color )
+		public function fill( $x, $y )
 		{
-			$color_array = $this->colorToArray( $color );
-			$color_alloc = imagecolorallocate( $this->image, 
-				$color_array[0], $color_array[1], $color_array[2] );
-
-			imagefill( $this->image, $x, $y, $color_alloc );
+			$color = $this->createColorAllocation();
+			imagefill( $this->image, $x, $y, $color );
 		}
 
 		// ************************************************** 
@@ -87,6 +96,54 @@
 					imagejpeg( $this->image, $filename );
 					break;
 			}
+		}
+
+		// ************************************************** 
+		//  drawRectangle
+		/*!
+			@brief Draws a rectangle with current color what
+			  is set using method setColor. By default it is black.
+			@param $x1 X start point
+			@param $y1 Y start point
+			@param $x2 X end point
+			@param $y2 Y end point
+		*/
+		// ************************************************** 
+		public function drawRectangle( $x1, $y1, $x2, $y2 )
+		{
+			$color = $this->createColorAllocation();
+			imagerectangle( $this->image, $x1, $y1, $x2, $y2, $color );
+		}
+
+		// ************************************************** 
+		//  drawFilledRectangle
+		/*!
+			@brief Draws a rectangle what will be floodfilled
+			  with current color.
+			@param $x1 X start point
+			@param $y1 Y start point
+			@param $x2 X end point
+			@param $y2 Y end point
+		*/
+		// ************************************************** 
+		public function drawFilledRectangle( $x1, $y1, $x2, $y2 )
+		{
+			$color = $this->createColorAllocation();
+			imagefilledrectangle( $this->image, $x1, $y1, 
+				$x2, $y2, $color );
+		}
+
+
+		// ************************************************** 
+		//  setColor
+		/*!
+			@brief Set color what will be used in next action
+			@param $color Color in HEX-value
+		*/
+		// ************************************************** 
+		public function setColor( $color )
+		{
+			$this->color = $this->colorToArray( $color );
 		}
 
 		// ************************************************** 
@@ -132,6 +189,20 @@
 				$color_array[$i] = hexdec( $color_array[$i] );
 
 			return $color_array;
+		}
+
+		// ************************************************** 
+		//  createColorAllocation
+		/*!
+			@brief Create color allocation
+			@return Color allocation
+		*/
+		// ************************************************** 
+		private function createColorAllocation()
+		{
+			$col = $this->color;
+			return imagecolorallocate( $this->image, $col[0], 
+				$col[1], $col[2] );
 		}
 	}
 

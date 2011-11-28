@@ -10,3 +10,12 @@ CPHPGD
 	Author:
 		Aleksi Räsänen, 2011
 		aleksi.rasanen@runosydan.net
+
+	Example to create two boxes:
+		$cPHPGD = new CPHPGD;
+		$cPHPGD->createImage( 800, 600 );
+		$cPHPGD->setColor( '#0F00AA' );
+		$cPHPGD->drawFilledRectangle( 10, 10, 400, 400 );
+		$cPHPGD->setColor( '#000000' );
+		$cPHPGD->drawFilledRectangle( 100, 100, 300, 300 );
+		$cPHPGD->saveImage( 'kuva.jpg' );
