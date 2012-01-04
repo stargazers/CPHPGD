@@ -34,6 +34,17 @@
 		private $color;
 
 		// ************************************************** 
+		//  __construct
+		/*!
+			@brief Initialize class variables
+		*/
+		// ************************************************** 
+		public function __construct()
+		{
+			$this->image = '';
+		}
+
+		// ************************************************** 
 		//  __destruct
 		/*!
 			@brief Class destructor. Removes image from memory.
@@ -41,7 +52,8 @@
 		// ************************************************** 
 		public function __destruct()
 		{
-			imagedestroy( $this->image );
+			if( $this->image != '' )
+				imagedestroy( $this->image );
 		}
 
 		// ************************************************** 
